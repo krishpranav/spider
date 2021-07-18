@@ -23,12 +23,10 @@ module Spider
         every_url_like(pattern,&block)
       end
   
-
       def all_headers
         every_page { |page| yield page.headers }
       end
   
-
       def every_page(&block)
         @every_page_blocks << block
         return self
@@ -47,6 +45,7 @@ module Spider
         end
       end
   
+
       def every_timedout_page
         every_page do |page|
           yield page if (block_given? && page.timedout?)
@@ -60,27 +59,26 @@ module Spider
         end
       end
   
+
       def every_unauthorized_page
         every_page do |page|
           yield page if (block_given? && page.unauthorized?)
         end
       end
-  
-      
+
       def every_forbidden_page
         every_page do |page|
           yield page if (block_given? && page.forbidden?)
         end
       end
   
- 
+
       def every_missing_page
         every_page do |page|
           yield page if (block_given? && page.missing?)
         end
       end
   
-
       def every_internal_server_error_page
         every_page do |page|
           yield page if (block_given? && page.had_internal_server_error?)
@@ -115,7 +113,6 @@ module Spider
         end
       end
   
-
       def every_doc
         every_page do |page|
           if block_given?
@@ -137,7 +134,7 @@ module Spider
         end
       end
   
-   
+
       def every_xml_doc
         every_page do |page|
           if (block_given? && page.xml?)
@@ -148,7 +145,6 @@ module Spider
         end
       end
   
-
       def every_xsl_doc
         every_page do |page|
           if (block_given? && page.xsl?)
@@ -158,6 +154,7 @@ module Spider
           end
         end
       end
+  
 
       def every_rss_doc
         every_page do |page|
@@ -169,7 +166,6 @@ module Spider
         end
       end
   
-
       def every_atom_doc
         every_page do |page|
           if (block_given? && page.atom?)
@@ -180,21 +176,18 @@ module Spider
         end
       end
   
-
       def every_javascript_page
         every_page do |page|
           yield page if (block_given? && page.javascript?)
         end
       end
   
-
       def every_css_page
         every_page do |page|
           yield page if (block_given? && page.css?)
         end
       end
   
-
       def every_rss_page
         every_page do |page|
           yield page if (block_given? && page.rss?)
@@ -208,14 +201,12 @@ module Spider
         end
       end
   
-
       def every_ms_word_page
         every_page do |page|
           yield page if (block_given? && page.ms_word?)
         end
       end
   
-
       def every_pdf_page
         every_page do |page|
           yield page if (block_given? && page.pdf?)
@@ -233,3 +224,16 @@ module Spider
         return self
       end
   
+      protected
+  
+      def initialize_events(options={})
+        @every_url_blocks        = []
+        @every_failed_url_blocks = []
+        @every_url_like_blocks   = Hash.new { |hash,key| hash[key] = [] }
+  
+        @every_page_blocks = []
+        @every_link_blocks = []
+      end
+  
+    end
+  end
