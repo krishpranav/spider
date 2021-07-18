@@ -193,3 +193,9 @@ module Spider
         accept: options[:hosts],
         reject: options[:ignore_hosts]
     )
+
+    def visit_ext?(path)
+        @ext_rules.accept?(File.extname(path)[1..-1])
+    end
+end
+end
