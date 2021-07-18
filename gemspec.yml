@@ -1,4 +1,4 @@
-name: spidr
+name: spider
 summary: A Ruby web spidering library
 description:
   A ruby web spidering tool that can spider a site, multiple domains, certain links or infinitely
