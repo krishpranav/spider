@@ -27,3 +27,16 @@ describe Agent do
         it "should initialize #queue" do
           expect(subject.queue).to be_empty
         end
+
+        it "should initialize the #session_cache" do
+            expect(subject.session).to be_kind_of(SessionCache)
+        end
+
+        it "should initialize the #cookie_jar" do
+            expect(subject.cookies).to be_kind_of(CookieJar)
+        end
+        
+        it "should initialize the #auth_store" do
+            expect(subject.authorized).to be_kind_of(AuthStore)
+        end
+
