@@ -169,3 +169,27 @@ module Spider
     end
 
     protected
+
+    def initialize_filter(options={})
+        @schemes = []
+
+        if options[:schemes]
+            self.schemes = options[:schemes]
+        else
+            @schemes << 'http'
+        
+        begin
+            require 'net/https'
+
+            @schemes << 'https'
+        rescue Gem::LoadError => e
+            raise(e)
+        rescue ::LoadError
+            warn "Warrning cannot load 'net/https'. https support disabled"
+        end
+    end
+
+    @host_rules = Rules.new(
+        accept: options[:hosts],
+        reject: options[:ignore_hosts]
+    )
