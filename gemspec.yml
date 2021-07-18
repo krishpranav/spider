@@ -1,0 +1,18 @@
+name: spidr
+summary: A Ruby web spidering library
+description:
+  A ruby web spidering tool that can spider a site, multiple domains, certain links or infinitely
+
+license: MIT
+authors: krishpranav
+email: 
+homepage: https://github.com/krishpranav/spider#readme
+has_yard: true
+
+required_ruby_version: ">= 2.0.0"
+
+dependencies:
+  nokogiri: ~> 1.3
+
+development_dependencies:
+  bundler: ~> 2.0
