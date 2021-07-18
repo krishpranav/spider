@@ -5,16 +5,13 @@ module Spider
 
     attr_reader :schemes
 
-
     def schemes=(new_schemes)
       @schemes = new_schemes.map(&:to_s)
     end
 
-
     def visit_hosts
       @host_rules.accept
     end
-
 
     def visit_hosts_like(pattern=nil,&block)
       if pattern
@@ -30,7 +27,6 @@ module Spider
       @host_rules.reject
     end
 
-
     def ignore_hosts_like(pattern=nil,&block)
       if pattern
         ignore_hosts << pattern
@@ -40,7 +36,6 @@ module Spider
 
       return self
     end
-
 
     def visit_ports
       @port_rules.accept
@@ -62,7 +57,6 @@ module Spider
       @port_rules.reject
     end
 
-
     def ignore_ports_like(pattern=nil,&block)
       if pattern
         ignore_ports << pattern
@@ -72,7 +66,6 @@ module Spider
 
       return self
     end
-
 
     def visit_links
       @link_rules.accept
@@ -89,7 +82,6 @@ module Spider
       return self
     end
 
-
     def ignore_links
       @link_rules.reject
     end
@@ -105,11 +97,9 @@ module Spider
       return self
     end
 
-
     def visit_urls
       @url_rules.accept
     end
-
 
     def visit_urls_like(pattern=nil,&block)
       if pattern
@@ -137,11 +127,9 @@ module Spider
       return self
     end
 
-
     def visit_exts
       @ext_rules.accept
     end
-
 
     def visit_exts_like(pattern=nil,&block)
       if pattern
@@ -170,32 +158,80 @@ module Spider
 
     protected
 
-    def initialize_filter(options={})
-        @schemes = []
+    def initialize_filters(options={})
+      @schemes = []
 
-        if options[:schemes]
-            self.schemes = options[:schemes]
-        else
-            @schemes << 'http'
-        
+      if options[:schemes]
+        self.schemes = options[:schemes]
+      else
+        @schemes << 'http'
+
         begin
-            require 'net/https'
+          require 'net/https'
 
-            @schemes << 'https'
+          @schemes << 'https'
         rescue Gem::LoadError => e
-            raise(e)
+          raise(e)
         rescue ::LoadError
-            warn "Warrning cannot load 'net/https'. https support disabled"
+          warn "Warning: cannot load 'net/https', https support disabled"
         end
-    end
+      end
 
-    @host_rules = Rules.new(
+      @host_rules = Rules.new(
         accept: options[:hosts],
         reject: options[:ignore_hosts]
-    )
+      )
+      @port_rules = Rules.new(
+        accept: options[:ports],
+        reject: options[:ignore_ports]
+      )
+      @link_rules = Rules.new(
+        accept: options[:links],
+        reject: options[:ignore_links]
+      )
+      @url_rules = Rules.new(
+        accept: options[:urls],
+        reject: options[:ignore_urls]
+      )
+      @ext_rules = Rules.new(
+        accept: options[:exts],
+        reject: options[:ignore_exts]
+      )
+
+      if options[:host]
+        visit_hosts_like(options[:host])
+      end
+    end
+
+
+    def visit_scheme?(scheme)
+      if scheme
+        @schemes.include?(scheme)
+      else
+        true
+      end
+    end
+
+    def visit_host?(host)
+      @host_rules.accept?(host)
+    end
+
+    def visit_port?(port)
+      @port_rules.accept?(port)
+    end
+
+    def visit_link?(link)
+      @link_rules.accept?(link)
+    end
+
+    def visit_url?(link)
+      @url_rules.accept?(link)
+    end
+
 
     def visit_ext?(path)
-        @ext_rules.accept?(File.extname(path)[1..-1])
+      @ext_rules.accept?(File.extname(path)[1..-1])
     end
-end
+
+  end
 end
