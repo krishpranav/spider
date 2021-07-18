@@ -40,3 +40,50 @@ describe Agent do
             expect(subject.authorized).to be_kind_of(AuthStore)
         end
 
+        describe "#history=" do
+            let(:previous_history) { Set[URI('http://example.com')] }
+        
+            before { subject.history = previous_history }
+        
+            it "should be able to restore the history" do
+              expect(subject.history).to eq(previous_history)
+            end
+        
+            context "when given an Array of URIs" do
+              let(:previous_history)  { [URI('http://example.com')] }
+              let(:converted_history) { Set.new(previous_history) }
+        
+              it "should convert the Array to a Set" do
+                expect(subject.history).to eq(converted_history)
+              end
+            end
+        
+            context "when given an Set of Strings" do
+              let(:previous_history)  { Set['http://example.com'] }
+              let(:converted_history) do
+                previous_history.map { |url| URI(url) }.to_set
+              end
+        
+              it "should convert the Strings to URIs" do
+                expect(subject.history).to eq(converted_history)
+              end
+            end
+          end
+        
+          describe "#failures=" do
+            let(:previous_failures) { Set[URI('http://example.com')] }
+        
+            before { subject.failures = previous_failures }
+        
+            it "should be able to restore the failures" do
+              expect(subject.failures).to eq(previous_failures)
+            end
+        
+            context "when given an Array of URIs" do
+              let(:previous_failures)  { [URI('http://example.com')] }
+              let(:converted_failures) { Set.new(previous_failures) }
+        
+              it "should convert the Array to a Set" do
+                expect(subject.failures).to eq(converted_failures)
+              end
+            end
