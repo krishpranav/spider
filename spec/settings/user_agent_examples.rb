@@ -1,6 +1,6 @@
 require 'rspec'
 
-shared_examples_for "includes Spidr::Settings::UserAgent" do
+shared_examples_for "includes Spider::Settings::UserAgent" do
   describe "user_agent" do
     context "default value" do
       it { expect(subject.user_agent).to be_nil }

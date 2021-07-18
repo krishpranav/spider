@@ -1,4 +1,4 @@
-require 'spidr/agent'
+require 'spider/agent'
 
 require 'spec_helper'
 
@@ -14,9 +14,9 @@ describe Agent do
 
     describe ":hosts" do
       it "should set the hosts that will be visited" do
-        agent = described_class.new(hosts: ['spidr.rubyforge.org'])
+        agent = described_class.new(hosts: ['spider.rubyforge.org'])
 
-        expect(agent.visit_hosts).to be == ['spidr.rubyforge.org']
+        expect(agent.visit_hosts).to be == ['spider.rubyforge.org']
       end
     end
 

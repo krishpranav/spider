@@ -1,6 +1,6 @@
 require 'rspec'
 
-shared_examples_for "includes Spidr::Settings::Timeouts" do
+shared_examples_for "includes Spider::Settings::Timeouts" do
   describe "read_timeout" do
     context "default value" do
       it { expect(subject.read_timeout).to be_nil }

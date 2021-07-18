@@ -1,4 +1,4 @@
-require 'spidr/auth_store'
+require 'spider/auth_store'
 
 require 'spec_helper'
 
@@ -49,7 +49,7 @@ describe AuthStore do
     end
 
     it 'should not match a URL with a different host' do
-      remote_uri = URI('http://spidr.rubyforge.org/course/auth')
+      remote_uri = URI('http://spider.rubyforge.org/course/auth')
 
       expect(@auth_store[remote_uri]).to be_nil
     end

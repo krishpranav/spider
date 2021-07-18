@@ -1,4 +1,4 @@
-require 'spidr/extensions/uri'
+require 'spider/extensions/uri'
 
 require 'spec_helper'
 

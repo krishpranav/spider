@@ -2,10 +2,10 @@ require 'spec_helper'
 require 'example_app'
 require 'settings/user_agent_examples'
 
-require 'spidr/agent'
+require 'spider/agent'
 
 describe Agent do
-  it_should_behave_like "includes Spidr::Settings::UserAgent"
+  it_should_behave_like "includes Spider::Settings::UserAgent"
 
   describe "#initialize" do
     it "should not be running" do

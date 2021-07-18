@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'example_page'
 
-require 'spidr/page'
+require 'spider/page'
 
 describe Page do
   include_context "example Page"

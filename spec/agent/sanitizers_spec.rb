@@ -1,4 +1,4 @@
-require 'spidr/agent'
+require 'spider/agent'
 
 require 'spec_helper'
 

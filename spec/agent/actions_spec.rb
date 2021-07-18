@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'example_app'
 
-require 'spidr/agent'
+require 'spider/agent'
 
 describe Agent do
   describe "#continue!" do

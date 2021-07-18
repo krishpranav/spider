@@ -1,9 +1,9 @@
 require 'rspec'
 
-shared_examples "includes Spidr::Settings::Proxy" do
+shared_examples "includes spider::Settings::Proxy" do
   let(:proxy_host) { 'proxy.example.com' }
   let(:proxy_port) { 9999 }
-  let(:proxy) { Spidr::Proxy.new(host: proxy_host, port: proxy_port) }
+  let(:proxy) { Spider::Proxy.new(host: proxy_host, port: proxy_port) }
 
   describe "proxy" do
     context "when @proxy is not set" do
