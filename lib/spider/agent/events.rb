@@ -33,4 +33,16 @@ module Spider
                 yield page if (block_given? && page.ok?)
             end
         end
+
+        def every_redirect_page
+            every_page do |page|
+                yield page if (block_given? && page.redirect?)
+            end
+        end
+
+        def every_timeout_page
+            every_page do |page|
+                yield page if (block_given? && page.timedout?)
+            end
+        end
         
